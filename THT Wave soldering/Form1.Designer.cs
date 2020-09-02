@@ -96,6 +96,14 @@
             this.label19 = new System.Windows.Forms.Label();
             this.LBDate = new System.Windows.Forms.Label();
             this.GridReport = new System.Windows.Forms.DataGridView();
+            this.GRTable = new System.Windows.Forms.GroupBox();
+            this.TableGrid = new System.Windows.Forms.DataGridView();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this._grid = new System.Windows.Forms.DataGridView();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.CBDayNight = new System.Windows.Forms.ComboBox();
+            this.label20 = new System.Windows.Forms.Label();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -107,12 +115,6 @@
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GRTable = new System.Windows.Forms.GroupBox();
-            this.TableGrid = new System.Windows.Forms.DataGridView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this._grid = new System.Windows.Forms.DataGridView();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.loginGR.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MenuGrid)).BeginInit();
             this.GRAddData.SuspendLayout();
@@ -209,6 +211,8 @@
             // GRAddData
             // 
             this.GRAddData.BackColor = System.Drawing.Color.OldLace;
+            this.GRAddData.Controls.Add(this.CBDayNight);
+            this.GRAddData.Controls.Add(this.label20);
             this.GRAddData.Controls.Add(this.ClearBT);
             this.GRAddData.Controls.Add(this.SelectionCount);
             this.GRAddData.Controls.Add(this.label18);
@@ -237,9 +241,10 @@
             this.GRAddData.Controls.Add(this.label2);
             this.GRAddData.Controls.Add(this.label1);
             this.GRAddData.Controls.Add(this.Controller_TB);
-            this.GRAddData.Location = new System.Drawing.Point(1250, 42);
+            this.GRAddData.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.GRAddData.Location = new System.Drawing.Point(1517, 12);
             this.GRAddData.Name = "GRAddData";
-            this.GRAddData.Size = new System.Drawing.Size(332, 345);
+            this.GRAddData.Size = new System.Drawing.Size(132, 30);
             this.GRAddData.TabIndex = 6;
             this.GRAddData.TabStop = false;
             this.GRAddData.Text = "Форма Добавления";
@@ -251,7 +256,7 @@
             this.ClearBT.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.ClearBT.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ClearBT.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ClearBT.Location = new System.Drawing.Point(311, 428);
+            this.ClearBT.Location = new System.Drawing.Point(311, 456);
             this.ClearBT.Name = "ClearBT";
             this.ClearBT.Size = new System.Drawing.Size(92, 31);
             this.ClearBT.TabIndex = 1005;
@@ -260,7 +265,7 @@
             // 
             // SelectionCount
             // 
-            this.SelectionCount.Location = new System.Drawing.Point(6, 268);
+            this.SelectionCount.Location = new System.Drawing.Point(6, 291);
             this.SelectionCount.Minimum = new decimal(new int[] {
             1,
             0,
@@ -279,7 +284,7 @@
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label18.Location = new System.Drawing.Point(241, 268);
+            this.label18.Location = new System.Drawing.Point(241, 291);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(93, 16);
             this.label18.TabIndex = 1003;
@@ -304,7 +309,7 @@
             this.CBLot.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.CBLot.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.CBLot.FormattingEnabled = true;
-            this.CBLot.Location = new System.Drawing.Point(6, 168);
+            this.CBLot.Location = new System.Drawing.Point(6, 191);
             this.CBLot.Name = "CBLot";
             this.CBLot.Size = new System.Drawing.Size(229, 24);
             this.CBLot.TabIndex = 27;
@@ -315,7 +320,7 @@
             this.DefectPos.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.DefectPos.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.DefectPos.FormattingEnabled = true;
-            this.DefectPos.Location = new System.Drawing.Point(6, 302);
+            this.DefectPos.Location = new System.Drawing.Point(6, 325);
             this.DefectPos.Name = "DefectPos";
             this.DefectPos.Size = new System.Drawing.Size(229, 24);
             this.DefectPos.TabIndex = 27;
@@ -324,7 +329,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label11.Location = new System.Drawing.Point(241, 307);
+            this.label11.Location = new System.Drawing.Point(241, 330);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(144, 16);
             this.label11.TabIndex = 26;
@@ -343,7 +348,7 @@
             // ADDDateProject
             // 
             this.ADDDateProject.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.ADDDateProject.Location = new System.Drawing.Point(6, 400);
+            this.ADDDateProject.Location = new System.Drawing.Point(6, 423);
             this.ADDDateProject.Name = "ADDDateProject";
             this.ADDDateProject.Size = new System.Drawing.Size(229, 20);
             this.ADDDateProject.TabIndex = 23;
@@ -363,7 +368,7 @@
             "4",
             "5",
             "6"});
-            this.CBLine.Location = new System.Drawing.Point(6, 201);
+            this.CBLine.Location = new System.Drawing.Point(6, 224);
             this.CBLine.Name = "CBLine";
             this.CBLine.Size = new System.Drawing.Size(229, 24);
             this.CBLine.TabIndex = 24;
@@ -372,7 +377,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label10.Location = new System.Drawing.Point(239, 205);
+            this.label10.Location = new System.Drawing.Point(239, 228);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(50, 16);
             this.label10.TabIndex = 23;
@@ -382,7 +387,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label9.Location = new System.Drawing.Point(241, 400);
+            this.label9.Location = new System.Drawing.Point(241, 423);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(41, 16);
             this.label9.TabIndex = 22;
@@ -390,7 +395,7 @@
             // 
             // DefectCount
             // 
-            this.DefectCount.Location = new System.Drawing.Point(6, 369);
+            this.DefectCount.Location = new System.Drawing.Point(6, 392);
             this.DefectCount.Name = "DefectCount";
             this.DefectCount.Size = new System.Drawing.Size(229, 20);
             this.DefectCount.TabIndex = 20;
@@ -401,7 +406,7 @@
             this.SaveBT.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.SaveBT.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.SaveBT.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.SaveBT.Location = new System.Drawing.Point(6, 428);
+            this.SaveBT.Location = new System.Drawing.Point(6, 456);
             this.SaveBT.Name = "SaveBT";
             this.SaveBT.Size = new System.Drawing.Size(299, 31);
             this.SaveBT.TabIndex = 19;
@@ -423,7 +428,7 @@
             "15:00:00",
             "17:00:00",
             "19:30:00"});
-            this.CBTime.Location = new System.Drawing.Point(6, 231);
+            this.CBTime.Location = new System.Drawing.Point(6, 254);
             this.CBTime.Name = "CBTime";
             this.CBTime.Size = new System.Drawing.Size(229, 24);
             this.CBTime.TabIndex = 18;
@@ -432,7 +437,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label8.Location = new System.Drawing.Point(241, 234);
+            this.label8.Location = new System.Drawing.Point(241, 257);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(49, 16);
             this.label8.TabIndex = 17;
@@ -442,7 +447,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(240, 171);
+            this.label5.Location = new System.Drawing.Point(240, 194);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(33, 16);
             this.label5.TabIndex = 11;
@@ -452,7 +457,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.Location = new System.Drawing.Point(241, 372);
+            this.label7.Location = new System.Drawing.Point(241, 395);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(83, 16);
             this.label7.TabIndex = 16;
@@ -462,7 +467,7 @@
             // 
             this.DefectsCB.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.DefectsCB.FormattingEnabled = true;
-            this.DefectsCB.Location = new System.Drawing.Point(6, 334);
+            this.DefectsCB.Location = new System.Drawing.Point(6, 357);
             this.DefectsCB.Name = "DefectsCB";
             this.DefectsCB.Size = new System.Drawing.Size(229, 24);
             this.DefectsCB.TabIndex = 14;
@@ -471,7 +476,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(241, 339);
+            this.label6.Location = new System.Drawing.Point(241, 362);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(60, 16);
             this.label6.TabIndex = 13;
@@ -483,7 +488,7 @@
             this.CBProduct.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.CBProduct.ForeColor = System.Drawing.SystemColors.InfoText;
             this.CBProduct.FormattingEnabled = true;
-            this.CBProduct.Location = new System.Drawing.Point(6, 136);
+            this.CBProduct.Location = new System.Drawing.Point(6, 159);
             this.CBProduct.Name = "CBProduct";
             this.CBProduct.Size = new System.Drawing.Size(229, 24);
             this.CBProduct.TabIndex = 10;
@@ -492,7 +497,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(238, 139);
+            this.label4.Location = new System.Drawing.Point(238, 162);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(64, 16);
             this.label4.TabIndex = 9;
@@ -504,7 +509,7 @@
             this.CBModels.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.CBModels.ForeColor = System.Drawing.SystemColors.InfoText;
             this.CBModels.FormattingEnabled = true;
-            this.CBModels.Location = new System.Drawing.Point(6, 104);
+            this.CBModels.Location = new System.Drawing.Point(6, 130);
             this.CBModels.Name = "CBModels";
             this.CBModels.Size = new System.Drawing.Size(229, 24);
             this.CBModels.TabIndex = 8;
@@ -513,7 +518,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(238, 107);
+            this.label3.Location = new System.Drawing.Point(238, 133);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 16);
             this.label3.TabIndex = 7;
@@ -576,7 +581,7 @@
             this.GRAddmodel.Controls.Add(this.label12);
             this.GRAddmodel.Controls.Add(this.NameModel);
             this.GRAddmodel.Controls.Add(this.Close2);
-            this.GRAddmodel.Location = new System.Drawing.Point(860, 89);
+            this.GRAddmodel.Location = new System.Drawing.Point(1589, 92);
             this.GRAddmodel.Name = "GRAddmodel";
             this.GRAddmodel.Size = new System.Drawing.Size(253, 184);
             this.GRAddmodel.TabIndex = 7;
@@ -750,9 +755,9 @@
             this.GRReport.Controls.Add(this.label19);
             this.GRReport.Controls.Add(this.LBDate);
             this.GRReport.Controls.Add(this.GridReport);
-            this.GRReport.Location = new System.Drawing.Point(1750, 376);
+            this.GRReport.Location = new System.Drawing.Point(411, 12);
             this.GRReport.Name = "GRReport";
-            this.GRReport.Size = new System.Drawing.Size(87, 50);
+            this.GRReport.Size = new System.Drawing.Size(1293, 335);
             this.GRReport.TabIndex = 8;
             this.GRReport.TabStop = false;
             this.GRReport.Text = "Отчёт";
@@ -887,88 +892,11 @@
             this.GridReport.Size = new System.Drawing.Size(1412, 311);
             this.GridReport.TabIndex = 0;
             // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Модель";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Width = 109;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Изделие";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Width = 117;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Линия";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Width = 96;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "09:00:00";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Width = 125;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "11:00:00";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            this.Column5.Width = 125;
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "13:00:00";
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            this.Column6.Width = 125;
-            // 
-            // Column7
-            // 
-            this.Column7.HeaderText = "15:00:00";
-            this.Column7.Name = "Column7";
-            this.Column7.ReadOnly = true;
-            this.Column7.Width = 125;
-            // 
-            // Column8
-            // 
-            this.Column8.HeaderText = "17:00:00";
-            this.Column8.Name = "Column8";
-            this.Column8.ReadOnly = true;
-            this.Column8.Width = 125;
-            // 
-            // Column9
-            // 
-            this.Column9.HeaderText = "19:30:00";
-            this.Column9.Name = "Column9";
-            this.Column9.ReadOnly = true;
-            this.Column9.Width = 125;
-            // 
-            // Column11
-            // 
-            this.Column11.HeaderText = "За смену";
-            this.Column11.Name = "Column11";
-            this.Column11.ReadOnly = true;
-            this.Column11.Width = 122;
-            // 
-            // Column10
-            // 
-            this.Column10.HeaderText = "Цель";
-            this.Column10.Name = "Column10";
-            this.Column10.ReadOnly = true;
-            this.Column10.Width = 83;
-            // 
             // GRTable
             // 
             this.GRTable.BackColor = System.Drawing.Color.OldLace;
             this.GRTable.Controls.Add(this.TableGrid);
-            this.GRTable.Location = new System.Drawing.Point(445, 207);
+            this.GRTable.Location = new System.Drawing.Point(1601, 404);
             this.GRTable.Name = "GRTable";
             this.GRTable.Size = new System.Drawing.Size(301, 115);
             this.GRTable.TabIndex = 9;
@@ -1038,6 +966,106 @@
             // 
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // CBDayNight
+            // 
+            this.CBDayNight.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CBDayNight.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.CBDayNight.FormattingEnabled = true;
+            this.CBDayNight.Items.AddRange(new object[] {
+            "День",
+            "Ночь"});
+            this.CBDayNight.Location = new System.Drawing.Point(6, 101);
+            this.CBDayNight.Name = "CBDayNight";
+            this.CBDayNight.Size = new System.Drawing.Size(229, 24);
+            this.CBDayNight.TabIndex = 1007;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label20.Location = new System.Drawing.Point(239, 106);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(48, 16);
+            this.label20.TabIndex = 1006;
+            this.label20.Text = "Сутки";
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Модель";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 109;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Изделие";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Width = 117;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Линия";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Width = 96;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Width = 21;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            this.Column5.Width = 21;
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "";
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            this.Column6.Width = 21;
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "";
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
+            this.Column7.Width = 21;
+            // 
+            // Column8
+            // 
+            this.Column8.HeaderText = "";
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
+            this.Column8.Width = 21;
+            // 
+            // Column9
+            // 
+            this.Column9.HeaderText = "";
+            this.Column9.Name = "Column9";
+            this.Column9.ReadOnly = true;
+            this.Column9.Width = 21;
+            // 
+            // Column11
+            // 
+            this.Column11.HeaderText = "За смену";
+            this.Column11.Name = "Column11";
+            this.Column11.ReadOnly = true;
+            this.Column11.Width = 122;
+            // 
+            // Column10
+            // 
+            this.Column10.HeaderText = "Цель";
+            this.Column10.Name = "Column10";
+            this.Column10.ReadOnly = true;
+            this.Column10.Width = 83;
             // 
             // Form1
             // 
@@ -1134,17 +1162,6 @@
         private System.Windows.Forms.Button AddModelBT;
         private System.Windows.Forms.DataGridView GridReport;
         private System.Windows.Forms.DataGridView _grid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
         private System.Windows.Forms.NumericUpDown SelectionCount;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
@@ -1159,6 +1176,19 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label LBName1;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.ComboBox CBDayNight;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
     }
 }
 

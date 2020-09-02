@@ -19,39 +19,45 @@ namespace THT_Wave_soldering
 {
     public partial class Form1 : Form
     {
-       int X { get; set; } = 12;
-       int Y { get; set; } = 12;
-       int X_m { get; set; } = 411;
-       int Y_m { get; set; } = 12;
-       int RowIndex { get; set; }
-       string NameUser { get; set; }
-       int UserID { get; set; }
-       int SpecID { get; set; }
-       
+        int X { get; set; } = 12;
+        int Y { get; set; } = 12;
+        int X_m { get; set; } = 411;
+        int Y_m { get; set; } = 12;
+        int RowIndex { get; set; }
+        string NameUser { get; set; }
+        int UserID { get; set; }
+        int SpecID { get; set; }
+
+        List<string> listDay = new List<string> { "09:00:00", "11:00:00", "13:00:00", "15:00:00", "17:00:00", "19:30:00" };
+        List<string> listNight = new List<string> { "22:00:00", "00:00:00", "02:00:00", "04:00:00", "06:00:00", "07:30:00" };
+
+
         delegate void Row();
-        
+
 
         public Form1()
         {
             InitializeComponent();
-            BTlogin.Click += (a, e) => {if (!Log(TBLogin.Text)) { TBLogin.Clear(); return; } OnMenu(); };
-            TBLogin.KeyDown += (a, e) =>{ if (e.KeyCode == Keys.Enter)  { if (!Log(TBLogin.Text)) { TBLogin.Clear(); return; } OnMenu(); }  };
-            ExBT.Click += (a, e) => { Application.Exit(); };            
-            MenuGrid.CellClick += (a, e) => 
+            BTlogin.Click += (a, e) => { if (!Log(TBLogin.Text)) { TBLogin.Clear(); return; } OnMenu(); };
+            TBLogin.KeyDown += (a, e) => { if (e.KeyCode == Keys.Enter) { if (!Log(TBLogin.Text)) { TBLogin.Clear(); return; } OnMenu(); } };
+            ExBT.Click += (a, e) => { Application.Exit(); };
+            MenuGrid.CellClick += (a, e) =>
             {
-                RowIndex = MenuGrid.CurrentCell.RowIndex; 
-                List<Row> _RowMethod = new List<Row>() { AddData, AddModel, SendEmail, Report, GetTable,Back }; Refresh();
+                RowIndex = MenuGrid.CurrentCell.RowIndex;
+                List<Row> _RowMethod = new List<Row>() { AddData, AddModel, SendEmail, Report, GetTable, Back }; Refresh();
                 _RowMethod[RowIndex]();
-            
+
             };
 
             CBModels.TextChanged += (a, e) => { CBProduct.DataSource = listProduct(CBModels.Text); DefectPos.DataSource = listposition(); DefectPos.Text = ""; CBProduct.Text = ""; };
+
+            CBDayNight.TextChanged += (a, e) => { GetTime(CBDayNight.Text); };
 
             CBProduct.TextChanged += (a, e) => { CBLot.DataSource = listlot(); CBLot.Text = ""; };
 
             Close1.Click += (a, e) => { Refresh(); };
 
-            RB1.Click += (a, e) => 
+            RB1.Click += (a, e) =>
             {
                 addmodelSpec();
             };
@@ -60,9 +66,9 @@ namespace THT_Wave_soldering
 
             SpecCB.SelectedIndexChanged += (a, e) => { specGrid(); };
 
-            AddModelBT.Click += (a, e) => 
+            AddModelBT.Click += (a, e) =>
             {
-                if (_CheckControls(GRAddmodel, "Spec"))  return;
+                if (_CheckControls(GRAddmodel, "Spec")) return;
                 //if (!RB1.Checked & !SpecRB2.Checked) {MessageBox.Show("Надо добавить спецификацию к модели"); return; }
                 //if (Spec.Rows.Count == 1) { MessageBox.Show("Спецификации не обнаружено"); return; ; }
 
@@ -79,7 +85,7 @@ namespace THT_Wave_soldering
                 switch (CHDef.Checked)
                 {
                     case true:
-                        if (_CheckControls(GRAddData,"Defect"))
+                        if (_CheckControls(GRAddData, "Defect"))
                             return;
                         Save();
                         break;
@@ -95,25 +101,37 @@ namespace THT_Wave_soldering
                 //_Clear(GRAddData);
             };
 
-            ClearBT.Click += (a,e) => _Clear(GRAddData);
+            ClearBT.Click += (a, e) => _Clear(GRAddData);
 
-            TableGrid.CellClick += (a, e) => { GetUpdateForm(); };
+            TableGrid.CellClick += (a, e) => { /*GetUpdateForm();*/ };
 
-            CHDef.Click += (a, e) => { if (CHDef.Checked) { NoDefect(); return;   } Defect(); };
+            CHDef.Click += (a, e) => { if (CHDef.Checked) { NoDefect(); return; } Defect(); };
 
             MenuGrid.Location = new Point(X, Y);
             loginGR.Location = new Point(X, Y);
 
             foreach (Control item in this.Controls.OfType<GroupBox>())
-                         if (item.Name.StartsWith("GR"))
-                            item.Location = new Point(X_m, Y_m);       
+                if (item.Name.StartsWith("GR"))
+                    item.Location = new Point(X_m, Y_m);
+        }
+
+        void GetTime(string name)
+        {
+            CBTime.Items.Clear();
+            if (name == "День")
+                foreach (var item in listDay)
+                    CBTime.Items.Add(item);
+            else if (name == "Ночь")
+                foreach (var item in listNight)
+                    CBTime.Items.Add(item);
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            var student = new[] { new { Name = "Добавить данные" },  new { Name = "Добавить Модель" },  new { Name = "Отправить Карту" }, new { Name = "Отчёт" }, new { Name = "Исходная таблица" } , new { Name = "Назад" } };
+            var student = new[] { new { Name = "Добавить данные" }, new { Name = "Добавить Модель" }, new { Name = "Отправить Карту" }, new { Name = "Отчёт" }, new { Name = "Исходная таблица" }, new { Name = "Назад" } };
             MenuGrid.DataSource = student;
-            if (Start_Form.timesOK)  {  Report(); timer1.Enabled = true; }
+            if (Start_Form.timesOK) { Report(); timer1.Enabled = true; }
 
         }
 
@@ -156,45 +174,63 @@ namespace THT_Wave_soldering
         void AddData()
         {
             GRAddData.Visible = true;
-            GRAddData.Size = new Size(420, 465);
+            GRAddData.Size = new Size(420, 500);
             Controller_TB.Text = NameUser;
             CB_Controlles.DataSource = liStUser();
             CB_Controlles.Text = "";
             CBModels.DataSource = listModels();
             CBModels.Text = "";
             DefectsCB.DataSource = listDefect();
-            DefectsCB.Text = " ";   
+            DefectsCB.Text = " ";
         }
 
         void AddModel()
         {
-            
+
             GRAddmodel.Visible = true;
             GRAddmodel.Size = new Size(253, 184);
-           
+
         }
 
         void SendEmail()
         {
             Refresh();
             Report();
-            var result = MessageBox.Show($"Отправить Карту контроля ПВП за {DateTime.Now.ToString("dd.MM.yy")} на {DateTime.Now.ToString("HH:mm")}", "Предупреждение",   MessageBoxButtons.YesNo,  MessageBoxIcon.Question);
-            if (result == DialogResult.No) return;            
+            var result = MessageBox.Show($"Отправить Карту контроля ПВП за {DateTime.Now.ToString("dd.MM.yy")} на {DateTime.Now.ToString("HH:mm")}", "Предупреждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.No) return;
             timer1.Enabled = true;
+        }
+
+        void GetGridTime(ref int Starthour, ref int EndHour , ref int day)
+        {
+            if (DateTime.Now.Hour >= 21 && DateTime.Now.Hour >= 8)
+            { ListTime(listNight); Starthour = 20; EndHour = 8; day = 1; }
+            else if (DateTime.Now.Hour <= 20 && DateTime.Now.Hour >= 8)
+            { ListTime(listDay); Starthour = 8; EndHour = 20; day = 0; }
+        }
+
+        void ListTime(List<string> list)
+        {
+            for (int i = 3; i < list.Count + 3; i++)           
+                GridReport.Columns[i].HeaderText = list[i - 3];           
         }
 
         void Report()
         {
+            int Starthour = 8;
+            int Endhour = 20;
+            int day = 1;
+            GetGridTime(ref Starthour, ref Endhour, ref day);
             GRReport.Visible = true;
             GRReport.Size = new Size(1424, 500);
-            GRReport.Location = new Point(12, 353);
-
-        
+            GRReport.Location = new Point(12, 353);        
 
             LBDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
             LBHour.Text = DateTime.Now.ToString("HH:mm:ss");
 
-           if (GetReport()) return;
+            var start = DateTime.Now.AddHours(-(DateTime.Now.Hour - Starthour)).AddMinutes(-(DateTime.Now.Minute)).AddSeconds(-(DateTime.Now.Second));
+            var end = DateTime.Now.AddHours(-(DateTime.Now.Hour - Endhour)).AddMinutes(-(DateTime.Now.Minute)).AddSeconds(-(DateTime.Now.Second)).AddDays(day);
+            if (GetReport(start,end)) return;
 
             var list = (from DataGridViewRow a in _grid.Rows
                         select new {Name = a.Cells["Name"].Value.ToString(), Product = a.Cells["Product"].Value.ToString(), Line = a.Cells["Line"].Value.ToString(), Objective = a.Cells["Objective"].Value.ToString() }).Distinct().ToList();
@@ -252,9 +288,9 @@ namespace THT_Wave_soldering
 
                 using (var con = new Connect())
                 {
-                    var d = DateTime.Now.AddHours(-(DateTime.Now.Hour - 8)).AddMinutes(-(DateTime.Now.Minute)).AddSeconds(-(DateTime.Now.Second));
-                    LBName1.Text = (from a in con.Logs  join b in con.Users on a.ControllerId equals b.Id  where a.Date >= d   orderby a.Date descending  select b.UserName).FirstOrDefault();
-                    LBName2.Text = (from a in con.Logs  join b in con.Users on a.Mate_ControllerId equals b.Id  where a.Date >= d  orderby a.Date descending select b.UserName).FirstOrDefault();
+                    //var d = DateTime.Now.AddHours(-(DateTime.Now.Hour - 8)).AddMinutes(-(DateTime.Now.Minute)).AddSeconds(-(DateTime.Now.Second));
+                    LBName1.Text = (from a in con.Logs  join b in con.Users on a.ControllerId equals b.Id  where a.Date >= start && a.Date <= end orderby a.Date descending  select b.UserName).FirstOrDefault();
+                    LBName2.Text = (from a in con.Logs  join b in con.Users on a.Mate_ControllerId equals b.Id  where a.Date >= start && a.Date <= end orderby a.Date descending select b.UserName).FirstOrDefault();
                 }
 
             GridReport.ClearSelection();
@@ -539,6 +575,7 @@ namespace THT_Wave_soldering
 
         public bool _CheckControls(Control _control,string Def = "12345")
         {
+        
             foreach (Control I in _control.Controls)
                 if (String.IsNullOrEmpty(I.Text) & I.GetType() != typeof(Button))
                 {
@@ -655,14 +692,16 @@ namespace THT_Wave_soldering
         }
 
 
-       bool GetReport() //Получение таблица с лога
+       bool GetReport(DateTime start, DateTime end) //Получение таблица с лога
         {
             using (var con = new Connect())
             {
-                var d = DateTime.Now.AddHours(-(DateTime.Now.Hour - 8)).AddMinutes(-(DateTime.Now.Minute)).AddSeconds(-(DateTime.Now.Second));
+               
                 var list = (from a in con.Logs
                             join b in con.Models on a.ModelsId equals b.ID
-                            where a.Date >= d && a.Remove != true
+
+                            where a.Date >= start &&  a.Date <= end && a.Remove != true
+
                             group a by new { b.Name, b.Product, a.Line, a.Time, a.Selection, b.Opportunity, b.Objective } into g
                             orderby g.Key.Time
                             select new
@@ -744,19 +783,19 @@ namespace THT_Wave_soldering
             using (MailMessage MailMessage = new MailMessage(fromMailAdress, to))
             using (SmtpClient SmtpClient = new SmtpClient("mail.technopolis.gs", 25))
             {
-                MailMessage.CC.Add("Ломакина Светлана Ивановна <s.lomakina@dtvs.ru>");
-                MailMessage.CC.Add("Мелехин Константин Данилович <melekhin@dtvs.ru>");
-                MailMessage.CC.Add("Костина Ксения Викторовна <kostina@dtvs.ru>");
-                MailMessage.CC.Add("Лишик Станислав Александрович <lishik@dtvs.ru>");
-                MailMessage.CC.Add("Контролер ОТК <controlerotk@dtvs.ru>");
-                MailMessage.CC.Add("Слабицкая Татьяна Михайловна <slabitskaya@dtvs.ru>");
-                MailMessage.CC.Add("Набатов Валерий Юрьевич <v.nabatov@dtvs.ru>");
-                MailMessage.CC.Add("Гусаров Валерий Вячеславович <gusarov@dtvs.ru>");
-                MailMessage.CC.Add("Ященко Петр Владимирович <yashenko@dtvs.ru>");
-                MailMessage.CC.Add("Рыжков Иван Васильевич <i.ryjkov@dtvs.ru>");
-                MailMessage.CC.Add("Климчук Андрей Михайлович <klimchuk@dtvs.ru>");
-                MailMessage.CC.Add("Каспирович Дмитрий Иванович <kaspirovich@dtvs.ru>");
-                MailMessage.CC.Add("Лобанов Олег Юрьевич <lobanov@dtvs.ru>");
+                //MailMessage.CC.Add("Ломакина Светлана Ивановна <s.lomakina@dtvs.ru>");
+                //MailMessage.CC.Add("Мелехин Константин Данилович <melekhin@dtvs.ru>");
+                //MailMessage.CC.Add("Костина Ксения Викторовна <kostina@dtvs.ru>");
+                //MailMessage.CC.Add("Лишик Станислав Александрович <lishik@dtvs.ru>");
+                //MailMessage.CC.Add("Контролер ОТК <controlerotk@dtvs.ru>");
+                //MailMessage.CC.Add("Слабицкая Татьяна Михайловна <slabitskaya@dtvs.ru>");
+                //MailMessage.CC.Add("Набатов Валерий Юрьевич <v.nabatov@dtvs.ru>");
+                //MailMessage.CC.Add("Гусаров Валерий Вячеславович <gusarov@dtvs.ru>");
+                //MailMessage.CC.Add("Ященко Петр Владимирович <yashenko@dtvs.ru>");
+                //MailMessage.CC.Add("Рыжков Иван Васильевич <i.ryjkov@dtvs.ru>");
+                //MailMessage.CC.Add("Климчук Андрей Михайлович <klimchuk@dtvs.ru>");
+                //MailMessage.CC.Add("Каспирович Дмитрий Иванович <kaspirovich@dtvs.ru>");
+                //MailMessage.CC.Add("Лобанов Олег Юрьевич <lobanov@dtvs.ru>");
 
                 //MailMessage.CC.Add("Володин Андрей Александрович <a.volodin@dtvs.ru>");
 
