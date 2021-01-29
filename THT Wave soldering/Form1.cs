@@ -203,10 +203,14 @@ namespace THT_Wave_soldering
 
         void GetGridTime(ref int Starthour, ref int EndHour , ref int day)
         {
-            if (DateTime.Now.Hour >= 21 && DateTime.Now.Hour >= 8)
-            { ListTime(listNight); Starthour = 20; EndHour = 8; day = 1; }
-            else if (DateTime.Now.Hour <= 20 && DateTime.Now.Hour >= 8)
-            { ListTime(listDay); Starthour = 8; EndHour = 20; day = 0; }
+            var time = DateTime.Now.Hour;
+            if  (time >= 21 || time <= 7)
+            { ListTime(listNight); Starthour = 20; EndHour = 8; day = 1; } //Ночь
+
+            else if (time >= 8 || time <= 22)
+            { ListTime(listDay); Starthour = 8; EndHour = 20; day = 0; } //День
+
+        
         }
 
         void ListTime(List<string> list)
@@ -214,6 +218,8 @@ namespace THT_Wave_soldering
             for (int i = 3; i < list.Count + 3; i++)           
                 GridReport.Columns[i].HeaderText = list[i - 3];           
         }
+
+      
 
         void Report()
         {
@@ -227,9 +233,29 @@ namespace THT_Wave_soldering
 
             LBDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
             LBHour.Text = DateTime.Now.ToString("HH:mm:ss");
+            DateTime start = DateTime.Now;
+            DateTime end = DateTime.Now;
+                
+            if (day == 0)
+            {
+                 start = DateTime.Now.AddHours(-(DateTime.Now.Hour - Starthour)).AddMinutes(-(DateTime.Now.Minute)).AddSeconds(-(DateTime.Now.Second));
+                 end = DateTime.Now.AddHours(-(DateTime.Now.Hour - Endhour)).AddMinutes(-(DateTime.Now.Minute)).AddSeconds(-(DateTime.Now.Second)).AddDays(day);
+            }
+            else if (DateTime.Now.Hour >= 22)
+            {
+                start = DateTime.Now.AddHours(-(DateTime.Now.Hour - Starthour)).AddMinutes(-(DateTime.Now.Minute)).AddSeconds(-(DateTime.Now.Second));
+                end = DateTime.Now.AddHours(-(DateTime.Now.Hour - Endhour)).AddMinutes(-(DateTime.Now.Minute)).AddSeconds(-(DateTime.Now.Second)).AddDays(day);
+            }
+            else if (DateTime.Now.Hour >= 0)
+            {
+                start = DateTime.Now.AddHours(-(DateTime.Now.Hour - Starthour)).AddMinutes(-(DateTime.Now.Minute)).AddSeconds(-(DateTime.Now.Second)).AddDays(-day);
+                end = DateTime.Now.AddHours(-(DateTime.Now.Hour - Endhour)).AddMinutes(-(DateTime.Now.Minute)).AddSeconds(-(DateTime.Now.Second));
+            }
 
-            var start = DateTime.Now.AddHours(-(DateTime.Now.Hour - Starthour)).AddMinutes(-(DateTime.Now.Minute)).AddSeconds(-(DateTime.Now.Second));
-            var end = DateTime.Now.AddHours(-(DateTime.Now.Hour - Endhour)).AddMinutes(-(DateTime.Now.Minute)).AddSeconds(-(DateTime.Now.Second)).AddDays(day);
+           
+            //var start = DateTime.Parse("18.10.2020 20:00:00");
+            //var end = DateTime.Parse("19.10.2020 08:00:00");
+
             if (GetReport(start,end)) return;
 
             var list = (from DataGridViewRow a in _grid.Rows
@@ -554,10 +580,9 @@ namespace THT_Wave_soldering
             {
                 var modelid = con.Models.Where(c => c.Name == CBModels.Text).Select(c => c.ID).FirstOrDefault();
                 //return con.Specs.OrderBy(c => c.Name).Where(c => c.ModelId == modelid).Select(c => c.Position).ToList();
-                return (from a in con.Models
-                        join b in con.Specs on a.SpecId equals b.NumSpec
-                        where a.ID == modelid
-                        select b.Position).ToList();
+                return (from a in con.Logs                      
+                        where a.ModelsId == modelid
+                        select a.Position).Distinct().ToList();
             }
         }
 
@@ -757,7 +782,7 @@ namespace THT_Wave_soldering
         {
             string line = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + ".jpg";
             string obj = $"Карта контроля ПВП за {DateTime.Now.ToString("dd.MM.yy")} на {DateTime.Now.ToString("HH:mm")}";
-            GetScreen(1400, 495, line);
+            GetScreen(1700, 495, line);
             SendEmail(@"C:\Скриншот\" + line, obj);
         }
 
@@ -783,23 +808,23 @@ namespace THT_Wave_soldering
             using (MailMessage MailMessage = new MailMessage(fromMailAdress, to))
             using (SmtpClient SmtpClient = new SmtpClient("mail.technopolis.gs", 25))
             {
-                //MailMessage.CC.Add("Ломакина Светлана Ивановна <s.lomakina@dtvs.ru>");
-                //MailMessage.CC.Add("Мелехин Константин Данилович <melekhin@dtvs.ru>");
-                //MailMessage.CC.Add("Костина Ксения Викторовна <kostina@dtvs.ru>");
-                //MailMessage.CC.Add("Лишик Станислав Александрович <lishik@dtvs.ru>");
-                //MailMessage.CC.Add("Контролер ОТК <controlerotk@dtvs.ru>");
-                //MailMessage.CC.Add("Слабицкая Татьяна Михайловна <slabitskaya@dtvs.ru>");
-                //MailMessage.CC.Add("Набатов Валерий Юрьевич <v.nabatov@dtvs.ru>");
-                //MailMessage.CC.Add("Гусаров Валерий Вячеславович <gusarov@dtvs.ru>");
-                //MailMessage.CC.Add("Ященко Петр Владимирович <yashenko@dtvs.ru>");
-                //MailMessage.CC.Add("Рыжков Иван Васильевич <i.ryjkov@dtvs.ru>");
-                //MailMessage.CC.Add("Климчук Андрей Михайлович <klimchuk@dtvs.ru>");
-                //MailMessage.CC.Add("Каспирович Дмитрий Иванович <kaspirovich@dtvs.ru>");
-                //MailMessage.CC.Add("Лобанов Олег Юрьевич <lobanov@dtvs.ru>");
+                MailMessage.CC.Add("Ломакина Светлана Ивановна <s.lomakina@dtvs.ru>");
+                MailMessage.CC.Add("Мелехин Константин Данилович <melekhin@dtvs.ru>");
+                MailMessage.CC.Add("Костина Ксения Викторовна <kostina@dtvs.ru>");
+                MailMessage.CC.Add("Лишик Станислав Александрович <lishik@dtvs.ru>");
+                MailMessage.CC.Add("Контролер ОТК <controlerotk@dtvs.ru>");
+                MailMessage.CC.Add("Слабицкая Татьяна Михайловна <slabitskaya@dtvs.ru>");
+                MailMessage.CC.Add("Набатов Валерий Юрьевич <v.nabatov@dtvs.ru>");
+                MailMessage.CC.Add("Гусаров Валерий Вячеславович <gusarov@dtvs.ru>");
+                MailMessage.CC.Add("Ященко Петр Владимирович <yashenko@dtvs.ru>");
+                MailMessage.CC.Add("Рыжков Иван Васильевич <i.ryjkov@dtvs.ru>");
+                MailMessage.CC.Add("Климчук Андрей Михайлович <klimchuk@dtvs.ru>");
+                MailMessage.CC.Add("Каспирович Дмитрий Иванович <kaspirovich@dtvs.ru>");
+                MailMessage.CC.Add("Лобанов Олег Юрьевич <lobanov@dtvs.ru>");
 
                 //MailMessage.CC.Add("Володин Андрей Александрович <a.volodin@dtvs.ru>");
 
-                MailMessage.Subject = card;
+            MailMessage.Subject = card;
                 MailMessage.AlternateViews.Add(getEmbeddedImage(image, "1"));
 
                 //SmtpClient.EnableSsl = true;

@@ -42,6 +42,8 @@
             this.BTlogin = new System.Windows.Forms.Button();
             this.MenuGrid = new System.Windows.Forms.DataGridView();
             this.GRAddData = new System.Windows.Forms.GroupBox();
+            this.CBDayNight = new System.Windows.Forms.ComboBox();
+            this.label20 = new System.Windows.Forms.Label();
             this.ClearBT = new System.Windows.Forms.Button();
             this.SelectionCount = new System.Windows.Forms.NumericUpDown();
             this.label18 = new System.Windows.Forms.Label();
@@ -96,14 +98,6 @@
             this.label19 = new System.Windows.Forms.Label();
             this.LBDate = new System.Windows.Forms.Label();
             this.GridReport = new System.Windows.Forms.DataGridView();
-            this.GRTable = new System.Windows.Forms.GroupBox();
-            this.TableGrid = new System.Windows.Forms.DataGridView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this._grid = new System.Windows.Forms.DataGridView();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.CBDayNight = new System.Windows.Forms.ComboBox();
-            this.label20 = new System.Windows.Forms.Label();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -115,6 +109,12 @@
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GRTable = new System.Windows.Forms.GroupBox();
+            this.TableGrid = new System.Windows.Forms.DataGridView();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this._grid = new System.Windows.Forms.DataGridView();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.loginGR.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MenuGrid)).BeginInit();
             this.GRAddData.SuspendLayout();
@@ -242,13 +242,36 @@
             this.GRAddData.Controls.Add(this.label1);
             this.GRAddData.Controls.Add(this.Controller_TB);
             this.GRAddData.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.GRAddData.Location = new System.Drawing.Point(1517, 12);
+            this.GRAddData.Location = new System.Drawing.Point(796, 366);
             this.GRAddData.Name = "GRAddData";
-            this.GRAddData.Size = new System.Drawing.Size(132, 30);
+            this.GRAddData.Size = new System.Drawing.Size(431, 405);
             this.GRAddData.TabIndex = 6;
             this.GRAddData.TabStop = false;
             this.GRAddData.Text = "Форма Добавления";
             this.GRAddData.Visible = false;
+            // 
+            // CBDayNight
+            // 
+            this.CBDayNight.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CBDayNight.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.CBDayNight.FormattingEnabled = true;
+            this.CBDayNight.Items.AddRange(new object[] {
+            "День",
+            "Ночь"});
+            this.CBDayNight.Location = new System.Drawing.Point(6, 101);
+            this.CBDayNight.Name = "CBDayNight";
+            this.CBDayNight.Size = new System.Drawing.Size(229, 24);
+            this.CBDayNight.TabIndex = 1007;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label20.Location = new System.Drawing.Point(239, 106);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(48, 16);
+            this.label20.TabIndex = 1006;
+            this.label20.Text = "Сутки";
             // 
             // ClearBT
             // 
@@ -581,7 +604,7 @@
             this.GRAddmodel.Controls.Add(this.label12);
             this.GRAddmodel.Controls.Add(this.NameModel);
             this.GRAddmodel.Controls.Add(this.Close2);
-            this.GRAddmodel.Location = new System.Drawing.Point(1589, 92);
+            this.GRAddmodel.Location = new System.Drawing.Point(1744, 113);
             this.GRAddmodel.Name = "GRAddmodel";
             this.GRAddmodel.Size = new System.Drawing.Size(253, 184);
             this.GRAddmodel.TabIndex = 7;
@@ -853,14 +876,13 @@
             // 
             // GridReport
             // 
-            this.GridReport.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.GridReport.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.GridReport.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.GridReport.BackgroundColor = System.Drawing.Color.OldLace;
             this.GridReport.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.GridReport.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("MS Reference Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -885,12 +907,89 @@
             this.GridReport.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
             this.GridReport.RowHeadersVisible = false;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("MS Reference Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("MS Reference Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.GridReport.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.GridReport.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.GridReport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.GridReport.Size = new System.Drawing.Size(1412, 311);
             this.GridReport.TabIndex = 0;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Модель";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 83;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Изделие";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Width = 89;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Линия";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Width = 75;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Width = 21;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            this.Column5.Width = 21;
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "";
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            this.Column6.Width = 21;
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "";
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
+            this.Column7.Width = 21;
+            // 
+            // Column8
+            // 
+            this.Column8.HeaderText = "";
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
+            this.Column8.Width = 21;
+            // 
+            // Column9
+            // 
+            this.Column9.HeaderText = "";
+            this.Column9.Name = "Column9";
+            this.Column9.ReadOnly = true;
+            this.Column9.Width = 21;
+            // 
+            // Column11
+            // 
+            this.Column11.HeaderText = "За смену";
+            this.Column11.Name = "Column11";
+            this.Column11.ReadOnly = true;
+            this.Column11.Width = 95;
+            // 
+            // Column10
+            // 
+            this.Column10.HeaderText = "Цель";
+            this.Column10.Name = "Column10";
+            this.Column10.ReadOnly = true;
+            this.Column10.Width = 66;
             // 
             // GRTable
             // 
@@ -966,106 +1065,6 @@
             // 
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // CBDayNight
-            // 
-            this.CBDayNight.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CBDayNight.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CBDayNight.FormattingEnabled = true;
-            this.CBDayNight.Items.AddRange(new object[] {
-            "День",
-            "Ночь"});
-            this.CBDayNight.Location = new System.Drawing.Point(6, 101);
-            this.CBDayNight.Name = "CBDayNight";
-            this.CBDayNight.Size = new System.Drawing.Size(229, 24);
-            this.CBDayNight.TabIndex = 1007;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label20.Location = new System.Drawing.Point(239, 106);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(48, 16);
-            this.label20.TabIndex = 1006;
-            this.label20.Text = "Сутки";
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Модель";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Width = 109;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Изделие";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Width = 117;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Линия";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Width = 96;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Width = 21;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            this.Column5.Width = 21;
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "";
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            this.Column6.Width = 21;
-            // 
-            // Column7
-            // 
-            this.Column7.HeaderText = "";
-            this.Column7.Name = "Column7";
-            this.Column7.ReadOnly = true;
-            this.Column7.Width = 21;
-            // 
-            // Column8
-            // 
-            this.Column8.HeaderText = "";
-            this.Column8.Name = "Column8";
-            this.Column8.ReadOnly = true;
-            this.Column8.Width = 21;
-            // 
-            // Column9
-            // 
-            this.Column9.HeaderText = "";
-            this.Column9.Name = "Column9";
-            this.Column9.ReadOnly = true;
-            this.Column9.Width = 21;
-            // 
-            // Column11
-            // 
-            this.Column11.HeaderText = "За смену";
-            this.Column11.Name = "Column11";
-            this.Column11.ReadOnly = true;
-            this.Column11.Width = 122;
-            // 
-            // Column10
-            // 
-            this.Column10.HeaderText = "Цель";
-            this.Column10.Name = "Column10";
-            this.Column10.ReadOnly = true;
-            this.Column10.Width = 83;
             // 
             // Form1
             // 
